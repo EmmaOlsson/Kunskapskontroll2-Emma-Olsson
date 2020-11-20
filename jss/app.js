@@ -74,10 +74,12 @@ function selectCity(e) {
         // This function will be executed when the input from the user matches a valid city
         function (data) {
 
+            console.log(data)
+
             /* CITY NAME */
             // The h2 will get the value of the users input
             h2.innerText = inputCity;
-            
+
 
             /* COORDINATES */
             // Selects the p-element 'coord' from the HTML
