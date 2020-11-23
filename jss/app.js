@@ -25,7 +25,7 @@ function selectCity(e) {
     // Saves the input from the user to 'inputCity'
     let inputCity = input.value;
 
-    // Sets an empty value to the input-element to ????????
+    // Sets an empty value to the input-element 
     input.value = '';
 
 
