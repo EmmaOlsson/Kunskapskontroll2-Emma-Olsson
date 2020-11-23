@@ -1,22 +1,6 @@
 # Kunskapskontroll2-Emma-Olsson
 Weather app
 
-
-/* 
-- All info ska presenteras i metric units
-- Ett formulär med en text-input och en submit-knapp där användaren anger en stad.
-- Det nuvarande vädret för den inmatade staden hämtas och  presenteras. 
-Du behöver ha med följande: 
-- Description
-- Väderikon, se https://openweathermap.org/weather-conditions 
-- Temperatur
-- Vindhastighet
-- Luftfuktighet
-- Temperaturdatan ska användas för att ändra färg på något i appen. Kan vara hela bakgrunden eller en liten ikon, du väljer själv.
-- Utifall den inmatade staden inte kan hittas ska det visas ett tydligt och informerande meddelande.
-Kommentera all kod med beskrivning av vad den gör
- */
-
  This application gives you the current weather data of the city of your selection.
  You enter the city of your choice in the input-box and the application gives you the following information when entering the city and clicking the search-button:
 
