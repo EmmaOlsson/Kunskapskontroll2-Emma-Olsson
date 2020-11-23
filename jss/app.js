@@ -1,18 +1,3 @@
-/* 
-- All info ska presenteras i metric units
-- Ett formulär med en text-input och en submit-knapp där användaren anger en stad.
-- Det nuvarande vädret för den inmatade staden hämtas och  presenteras. 
-Du behöver ha med följande: 
-- Description
-- Väderikon, se https://openweathermap.org/weather-conditions 
-- Temperatur
-- Vindhastighet
-- Luftfuktighet
-- Temperaturdatan ska användas för att ändra färg på något i appen. Kan vara hela bakgrunden eller en liten ikon, du väljer själv.
-- Utifall den inmatade staden inte kan hittas ska det visas ett tydligt och informerande meddelande.
-Kommentera all kod med beskrivning av vad den gör
- */
-
 
 // Sets the value to the apiKey-variable
 const apiKey = 'b87ddb25bb27cb53301a1fa8d993b7db';
@@ -92,6 +77,7 @@ function selectCity(e) {
             // Gives the 'coordinatesText' a string containing the coordinates of the city
             coordinatesText.innerHTML = `Latitude: ${coordLat} - Longitude: ${coordLong}`;
 
+
             ////////////////////////////
             //* ICON AND DESCRIPTION *//
             ///////////////////////////
@@ -122,53 +108,95 @@ function selectCity(e) {
             // Sets the content of the text to the data value of weather description
             descriptionText.innerHTML = data.weather[0].description;
 
-            ////////////////
-            //* WEATHER *//
-            ///////////////
+            ///////////////////
+            //* TEMPERATURE *//
+            //////////////////
 
-            // temperature starts
-            let tempBox = document.querySelector('.data-text-temp');
+            // Selects the empty p-element 'temp-text' from HTML
             let tempText = document.querySelector('.temp-text');
-            tempText.innerText = 'Temperature:'
+
+            // Gives the tempText the value 'Temperature'
+            tempText.innerText = 'Temperature:';
+
+            // Selects the empty p-element 'data-text-temp' from HTML
+            let tempData = document.querySelector('.data-text-temp');
+
+            // Creates a variable (temp) and gives it the value of data.main.temp
             let temp = data.main.temp;
+
+            // Rounds the temperature to closest integer
             let tempRound = Math.round(temp);
-            tempBox.innerHTML = `${tempRound}°C`;
 
-            // wind starts
-            let windBox = document.querySelector('.data-text-wind');
+            // Gives tempText the value of the rounded temperature and adding '°C'
+            tempData.innerHTML = `${tempRound}°C`;
+
+
+
+            /////////////
+            //* WIND *//
+            ////////////
+
+            // Selects the empty p-element 'wind-text' from HTML
             let windText = document.querySelector('.wind-text');
-            windText.innerText = 'Wind:'
-            let wind = data.main.temp;
+
+            // Gives the windText the value 'Wind speed'
+            windText.innerText = 'Wind speed:'
+
+            // Selects the empty p-element 'data.text-wind' from HTML
+            let windData = document.querySelector('.data-text-wind');
+
+            // Creates a variable (wind) and gives it the value of data.wind.speed
+            let wind = data.wind.speed;
+
+            // Rounds the wind speed to closest integer
             let windRound = Math.round(wind);
-            windBox.innerHTML = `${windRound} M/s `;
 
-            // humidity starts
-            let humidityBox = document.querySelector('.data-text-humidity');
+            // Gives windText the value of the rounded wind and adding 'M/S'
+            windData.innerHTML = `${windRound} M/s `;
+
+            /////////////////
+            //* HUMIDITY *//
+            ////////////////
+
+            // Selects the empty p-element 'humidity-text' from HTML
             let humidityText = document.querySelector('.humidity-text');
+
+            // Gives the humidityText the value of 'Humidity'
             humidityText.innerText = 'Humidity:'
-            humidityBox.innerHTML = `${data.main.humidity}%`;
+
+            // Selects the empty p-element 'data-text-humidity' from HTML
+            let humidityData = document.querySelector('.data-text-humidity');
+
+            // Gives the 'humidityData' the value of 'data.main.humidity' and adding '%'
+            humidityData.innerHTML = `${data.main.humidity}%`;
 
 
+            ///////////////////////
+            //* MAIN-CONTAINER *//
+            //////////////////////
 
-            // Changes the background color of main-container depending on the temperature
+            // Changes the background color of the main-container depending on the citys temperature
 
             let containerBackground = document.querySelector('.main-container')
 
             // Sets the background color to dark blue
-            if (tempRound > -25 && tempRound < 0) {
+            if (tempRound > -40 && tempRound < 0) {
                 containerBackground.style.background = 'rgba(0, 14, 143, 0.400)';
 
                 // Sets the background color to light blue
             } else if (tempRound > 0 && tempRound <= 10) {
                 containerBackground.style.background = 'rgba(60, 95, 143, 0.400)';
 
+
                 // Sets the background color to orange
             } else if (tempRound > 10 && tempRound <= 20) {
                 containerBackground.style.background = 'rgba(143, 79, 0, 0.400)';
 
+
                 // Sets the background color to red
             } else if (tempRound > 20 && tempRound <= 30) {
                 containerBackground.style.background = 'rgba(143, 31, 0, 0.400)';
+
 
                 // Sets the background color to dark red
             } else if (tempRound > 30 && tempRound < 50) {
@@ -177,35 +205,47 @@ function selectCity(e) {
                 // Sets the background color to default
             } else {
                 containerBackground.style.background = 'rgba(255, 255, 255, 0.400)';
+
             }
 
 
+            ////////////////////////
+            //* BODY BACKGROUND *//
+            ///////////////////////
 
-            // Changes the body background depending on the citys weather-id
-
+            // Changes the bodys background depending on the citys weather-id. The variable 'iconImg' is also use weather icon
+            // Sets the transition to two seconds
             function changeBackground() {
                 body.style.backgroundImage = `url(/img/${iconImg}.jpg)`;
                 body.style.transition = "all 2s";
+
             }
             changeBackground();
 
-
         }
+
+    // Catches the error
     ).catch(
         function (error) {
+            // Logs the error message to the console
             console.log(error)
 
         }
     )
 }
 
+///////////////////////
+//* RESET FUNCTION *//
+//////////////////////
 
-
+// Selects the input text area from HTML
 let inputCity = document.querySelector('#input-city');
 
+// Adds an eventlistener with the event of click and the function 'resetWeatherData
 inputCity.addEventListener('click', resetWeatherData)
 
 // This function resets the data for daily weather
+
 function resetWeatherData() {
     cityTextDefault();
     coordDefault();
