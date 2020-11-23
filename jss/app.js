@@ -44,15 +44,15 @@ function selectCity(e) {
 
             // If the response from the server has the status code 404(wrong input from the user), an alert with an error messagage will be displayed, a message will be logged in the console and the following function will not be executed. Jumps to catch.
             else if (response.status === 404) {
-                alert('Please enter a valid city!')
-                throw 'Staden kunde inte hittas';
+                alert('The city was not found. Please enter a valid city!')
+                throw 'The city was not found';
 
             }
 
             // If the response from the server has the status code 401 (something wrong with the api-key), an alert with an error messagage will be displayed, a message will be logged in the console and the following function will not be executed. Jumps to catch
             else if (response.status === 401) {
-                alert('api')
-                throw 'Wrong API-key'
+                alert('The API-key is unvalid')
+                throw 'Unvalid API-key'
             }
         }
     ).then(
