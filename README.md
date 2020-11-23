@@ -20,7 +20,7 @@ Weather app
 
 - The humidity is shown in percentage.
 
-When clicking on the input field while showing current weather information, the input text area and the associated information will be se to default.
+When clicking on the input field while showing current weather information, the input text area and the associated information will be set to default.
 
 Error handling
 - The user will get an alert message if the city does not exist and a message will be logged in the console. Error message 404.
